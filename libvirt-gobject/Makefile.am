@@ -93,8 +93,11 @@ libvirt_gobject_1_0_la_DEPENDENCIES = \
 libvirt_gobject_1_0_la_LDFLAGS = \
 			$(COVERAGE_CFLAGS:-f%=-Wc,f%) \
 			$(CYGWIN_EXTRA_LDFLAGS) $(MINGW_EXTRA_LDFLAGS) \
-			-Wl,--version-script=$(srcdir)/libvirt-gobject.sym \
 			-version-info $(LIBVIRT_GLIB_VERSION_INFO)
+if HAVE_VSCRIPT
+libvirt_gobject_1_0_la_LDFLAGS += \
+			@VSCRIPT_LDFLAGS@,$(srcdir)/libvirt-gobject.sym
+endif
 
 libvirt-gobject-enums.c: $(libvirt_gobject_1_0_la_HEADERS)
 	$(AM_V_GEN)glib-mkenums \

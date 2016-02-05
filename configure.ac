@@ -75,6 +75,8 @@ LT_INIT([shared disable-static win32-dll])
 
 dnl AC_CONFIG_LIBOBJ_DIR([src])
 
+AX_CHECK_VSCRIPT
+
 AC_DEFINE([_GNU_SOURCE], [], [Enable GNU extensions])
 
 # Autoconf 2.61a.99 and earlier don't support linking a file only

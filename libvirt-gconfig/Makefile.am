@@ -215,8 +215,11 @@ libvirt_gconfig_1_0_la_DEPENDENCIES = \
 libvirt_gconfig_1_0_la_LDFLAGS = \
 			$(COVERAGE_CFLAGS:-f%=-Wc,f%) \
 			$(CYGWIN_EXTRA_LDFLAGS) $(MINGW_EXTRA_LDFLAGS) \
-			-Wl,--version-script=$(srcdir)/libvirt-gconfig.sym \
 			-version-info $(LIBVIRT_GLIB_VERSION_INFO)
+if HAVE_VSCRIPT
+libvirt_gconfig_1_0_la_LDFLAGS += \
+			@VSCRIPT_LDFLAGS@,$(srcdir)/libvirt-gconfig.sym
+endif
 
 BUILT_SOURCES = $(GCONFIG_GENERATED_FILES)
 

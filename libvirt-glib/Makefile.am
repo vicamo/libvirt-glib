@@ -34,8 +34,11 @@ libvirt_glib_1_0_la_DEPENDENCIES = \
 libvirt_glib_1_0_la_LDFLAGS = \
 			$(COVERAGE_CFLAGS:-f%=-Wc,f%) \
 			$(CYGWIN_EXTRA_LDFLAGS) $(MINGW_EXTRA_LDFLAGS) \
-			-Wl,--version-script=$(srcdir)/libvirt-glib.sym \
 			-version-info $(LIBVIRT_GLIB_VERSION_INFO)
+if HAVE_VSCRIPT
+libvirt_glib_1_0_la_LDFLAGS += \
+			@VSCRIPT_LDFLAGS@,$(srcdir)/libvirt-glib.sym
+endif
 
 # .libs/libvirt-glib.so is built by libtool as a side-effect of the Makefile
 # rule for libosvirt-glib.la.  However, checking symbols relies on Linux ELF layout
